@@ -9,14 +9,19 @@ try {
     exit 1
 }
 
+# Create virtual environment
+Write-Host "Creating virtual environment..."
+python3.13 -m venv venv
+.\venv\Scripts\Activate.ps1
+
 # Upgrade pip
 Write-Host "Upgrading pip..."
-python3.13 -m pip install --upgrade pip
+python -m pip install --upgrade pip
 
 # Install dependencies from requirements.txt if it exists
 if (Test-Path "requirements.txt") {
     Write-Host "Installing dependencies from requirements.txt..."
-    python3.13 -m pip install -r requirements.txt
+    python -m pip install -r requirements.txt
 } else {
     Write-Host "requirements.txt not found. Skipping dependency installation."
 }
