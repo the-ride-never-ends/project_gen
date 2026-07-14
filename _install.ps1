@@ -2,16 +2,16 @@
 
 # Check if Python 13 is installed
 try {
-    $pythonVersion = python3.13 --version 2>&1
+    $pythonVersion = python3.14 --version 2>&1
     Write-Host "Found Python: $pythonVersion"
 } catch {
-    Write-Host "Python 3.13 is not installed or not in PATH"
+    Write-Host "Python 3.14 is not installed or not in PATH"
     exit 1
 }
 
 # Create virtual environment
 Write-Host "Creating virtual environment..."
-python3.13 -m venv venv
+python3.14 -m venv venv
 .\venv\Scripts\Activate.ps1
 
 # Upgrade pip
