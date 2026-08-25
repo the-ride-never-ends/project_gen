@@ -20,6 +20,9 @@ param(
     [Parameter(Mandatory=$false)]
     [switch]$HasGui,
 
+    [Parameter(Mandatory=$false)]
+    [switch]$HasTests,
+
     [switch]$Help
 )
 
@@ -52,11 +55,9 @@ function Make-Subfolder {
         [string]$TargetDirectory,
         [string]$SubfolderName
     )
-    {
-        $SubfolderPath = Join-Path $TargetDirectory $SubfolderName
-        if (-not (Test-Path $SubfolderPath)) {
-            New-Item -ItemType Directory -Path $SubfolderPath | Out-Null
-        }
+    $SubfolderPath = Join-Path $TargetDirectory $SubfolderName
+    if (-not (Test-Path $SubfolderPath)) {
+        New-Item -ItemType Directory -Path $SubfolderPath | Out-Null
     }
 }
 
@@ -79,4 +80,18 @@ if ($HasGui) {
     Make-Subfolder -TargetDirectory $TargetDirectory -SubfolderName "resources"
     $ResourcesDirectory = Join-Path $TargetDirectory "resources"
     Make-Subfolder -TargetDirectory $ResourcesDirectory -SubfolderName "images"
+}
+
+if ($HasTests) {
+    Make-Subfolder -TargetDirectory $TargetDirectory -SubfolderName "tests"
+    $TestsDirectory = Join-Path $TargetDirectory "tests"
+    New-Item -ItemType File -Path (Join-Path $TestsDirectory "__init__.py")
+    New-Item -ItemType File -Path (Join-Path $TestsDirectory "conftest.py")
+    Set-Content -Path (Join-Path $TestsDirectory "test_main.py") -Value @'
+import pytest
+
+
+def test_placeholder():
+    assert True
+'@
 }

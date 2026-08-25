@@ -13,6 +13,23 @@ When you run the script, it creates a new project folder and adds the following 
 
 The script copies `.gitignore` from its own directory into the new project folder.
 
+### `-HasGui`
+
+Adds a `gui.py` file plus a scaffold for a web GUI:
+
+- `root/static/index.html`
+- `root/templates/index.html`
+- `global/css`, `global/js`, `global/images`
+- `resources/images`
+
+### `-HasTests`
+
+Adds a `tests` directory with a pytest skeleton:
+
+- `tests/__init__.py`
+- `tests/conftest.py`
+- `tests/test_main.py` (placeholder test)
+
 ## Usage
 
 ```powershell
@@ -24,6 +41,14 @@ The script copies `.gitignore` from its own directory into the new project folde
 ### `-ProjectName`
 
 Name of the project folder to create under `C:\Users\kyle\repos`.
+
+### `-HasGui`
+
+Switch. When present, scaffolds the GUI folders and files described above.
+
+### `-HasTests`
+
+Switch. When present, scaffolds the `tests` directory described above.
 
 ### `-Help`
 
